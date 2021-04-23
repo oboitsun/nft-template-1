@@ -76,12 +76,16 @@ export default class TemplateEditor extends Component {
           function={this.props.changeHeaderPatternColor}
         />
 
-        {/* <ColorPicker
-          name={this.props.state.vertical ? 'Side Background' : 'Footer Background'}
+        <ColorPicker
+          name='Box Backgorund'
           function={this.props.changeFooterBackground}
           currentState={this.props.state.footerBackground}
-        /> */}
-
+        />
+        <ColorPicker
+          name='Box Border Color'
+          function={this.props.changeFooterBorderColor}
+          currentState={this.props.state.footerBorderColor}
+        />
         {false && !this.props.state.vertical && (
           <>
             <label htmlFor='borderWidth'>Footer border Radius:</label>
@@ -98,18 +102,18 @@ export default class TemplateEditor extends Component {
           </>
         )}
 
-        {/* <h3>{this.props.state.vertical ? 'SidePattern' : 'Footer pattern:'}</h3>
+        <h3>Box Pattern </h3>
         <PatternLibrary
           changeHeaderPattern={this.props.changeFooterPattern}
           back={this.props.state.footerBackground}
           color={this.props.state.footerPatternColor}
-        /> */}
-        {/* 
+        />
+
         <ColorPicker
-          name={this.props.state.vertical ? 'Side Pattern Color' : 'Footer Pattern Color'}
+          name='Box Pattern Color'
           currentState={this.props.state.footerPatternColor}
           function={this.props.changeFooterPatternColor}
-        /> */}
+        />
         <ColorPicker
           name='Button Background'
           currentState={this.props.state.button.background}

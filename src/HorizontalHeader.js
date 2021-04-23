@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import TimeLeft from './Components/TimeLeft'
 import Star from './icons/Star'
 export default class HorizontalHeader extends Component {
-  render() {
+  choosePattern = (where, color, rotate = 45) => {
+    console.log(where)
     const patterns = {
       flat: {
         opacity: 1,
@@ -10,20 +11,28 @@ export default class HorizontalHeader extends Component {
       },
 
       dotted: {
-        opacity: 0.3,
-        backgroundImage: `radial-gradient(${this.props.headerPatternColor} 1px, transparent 1px), radial-gradient(${this.props.headerPatternColor} 1px, transparent 1px)`,
+        opacity: 0.4,
+        backgroundImage: `radial-gradient(${color} 1px, transparent 1px), radial-gradient(${color} 1px, transparent 1px)`,
         backgroundSize: '5px 5px',
         backgroundPosition: '0 0,2.5px 2.5px',
       },
       lined: {
-        opacity: 0.2,
-        background: `repeating-linear-gradient( 45deg, ${this.props.headerPatternColor} , ${this.props.headerPatternColor} 2px, transparent 2px, transparent 10px)`,
+        opacity: 0.4,
+        background: `repeating-linear-gradient( ${rotate}deg, ${color} , ${color} 2px, transparent 2px, transparent 10px)`,
       },
       gradient: {
-        opacity: 0.4,
-        backgroundImage: `linear-gradient(180deg, ${this.props.headerPatternColor} 0%, rgba(8,19,35,0) 100%)`,
+        opacity: 0.8,
+        backgroundImage: `linear-gradient(180deg, ${color} 0%, rgba(8,19,35,0) 100%)`,
       },
     }
+    return { ...patterns[where] }
+  }
+  render() {
+    const headerPattern = this.choosePattern(
+      this.props.headerPattern,
+      this.props.headerPatternColor
+    )
+    const boxPattern = this.choosePattern(this.props.boxPattern, this.props.boxPatternColor, 135)
     return (
       <div
         style={{
@@ -35,7 +44,7 @@ export default class HorizontalHeader extends Component {
         className='w-full h-full p-2 lg:px-5 lg:py-5 2xl:py-5 2xl:px-7 flex  relative '>
         <div
           style={{
-            ...patterns[this.props.headerPattern],
+            ...headerPattern,
             borderBottomRightRadius: `${this.props.headerBorderRadius}px`,
             borderBottomLeftRadius: `${this.props.headerBorderRadius}px`,
           }}
@@ -61,15 +70,17 @@ export default class HorizontalHeader extends Component {
           </div>
         </div>
 
-        <div className='w-full lg:w-2/5 flex-col border border-white p-4 justify-between relative z-10 xl:ml-7 2xl:ml-14'>
+        <div
+          style={{ background: this.props.boxBackground, borderColor: this.props.boxBorderColor }}
+          className='w-full lg:w-2/5 flex-col border-4  p-4 justify-between relative z-0 xl:ml-7 2xl:ml-14'>
           <div className='h-full flex  flex-col justify-between z-10'>
-            <div className='flex flex-col items-start mb-2'>
-              <span className='lg:font-semibold uppercase lg:text-xl leading-none'>Category:</span>
+            <div className='flex flex-col items-start mb-2 z-10'>
+              <span className='lg:font-semibold uppercase lg:text-xl leading-none '>Category:</span>
               <span className='lowercase tracking-wide lg:text-2xl 2xl:text-3xl leading-none -mt-1'>
                 sports
               </span>
             </div>
-            <div className='flex flex-col items-start mb-2'>
+            <div className='flex flex-col items-start mb-2 z-10'>
               <span className='text-left lg:font-semibold uppercase leading-none lg:text-xl'>
                 highest bid:
               </span>
@@ -77,7 +88,7 @@ export default class HorizontalHeader extends Component {
                 $3000
               </span>
             </div>
-            <div className='flex flex-col items-start mb-2'>
+            <div className='flex flex-col items-start mb-2 z-10'>
               <span className='text-left lg:font-semibold uppercase lg:text-lg 2xl:text-xl leading-none'>
                 series number:
               </span>
@@ -95,7 +106,7 @@ export default class HorizontalHeader extends Component {
                   ? `${this.props.button.borderWidth} solid ${this.props.button.borderColor}`
                   : 'none',
               }}
-              className='uppercase outline-none border rounded-lg border-gray-900 py-1 px-2 lg:px-4 lg:py-3 2xl:py-5 2xl:px-10 font-semibold leading-none'>
+              className='uppercase outline-none border rounded-lg border-gray-900 py-1 px-2 lg:px-4 lg:py-3 2xl:py-5 2xl:px-10 font-semibold leading-none z-10'>
               go to auction
             </button>
           </div>
@@ -106,9 +117,9 @@ export default class HorizontalHeader extends Component {
           </div>
           <div
             style={{
-              ...patterns[this.props.footerPattern],
-              borderBottomLeftRadius: `${this.props.footerBorderRadius}px`,
-              borderBottomRightRadius: `${this.props.footerBorderRadius}px`,
+              ...boxPattern,
+              // borderBottomRightRadius: `${this.props.headerBorderRadius}px`,
+              // borderBottomLeftRadius: `${this.props.headerBorderRadius}px`,
             }}
             className='w-full h-full absolute left-0 top-0 z-0'></div>
         </div>

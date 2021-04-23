@@ -19,6 +19,7 @@ export default class App extends Component {
       headerPatternColor: 'white',
       headerBorderRadius: 0,
       footerTextColor: this.headerTextColor,
+      footerBorderColor: 'white',
       footerPattern: 'flat',
       footerPatternColor: 'white',
       footerBorderRadius: 2,
@@ -167,16 +168,12 @@ export default class App extends Component {
       history: [...this.state.history, { footerPatternColor: this.state.footerPatternColor }],
     })
   }
-  changeFooterBorderRadius = (event) => {
-    /* const newHistory = this.state.history.slice(
-      0,
-      this.state.history.length - (this.state.stepsBack - 1)
-    ) */
+  changeFooterBorderColor = (color) => {
     this.setState({
       ...this.state,
       stepsBack: 0,
-      footerBorderRadius: event.target.value,
-      history: [...this.state.history, { footerBorderRadius: this.state.footerBorderRadius }],
+      footerBorderColor: color.hex,
+      history: [...this.state.history, { footerBorderColor: this.state.footerBorderColor }],
     })
   }
   changeButtonBack = (color) => {
@@ -243,12 +240,15 @@ export default class App extends Component {
                 textColor={this.state.headerTextColor}
                 button={this.state.button}
                 textColor={this.state.footerTextColor}
+                boxBorderColor={this.state.footerBorderColor}
+                boxPatternColor={this.state.footerPatternColor}
+                boxPattern={this.state.footerPattern}
+                boxBackground={this.state.footerBackground}
                 background={this.state.headerBackground}
               />
               {/* <HorizontalFooter
                 footerBorderRadius={this.state.headerBorderRadius}
-                footerPatternColor={this.state.footerPatternColor}
-                footerPattern={this.state.footerPattern}
+                
                 button={this.state.button}
                 textColor={this.state.footerTextColor}
                 background={this.state.footerBackground}
@@ -268,7 +268,7 @@ export default class App extends Component {
           changeHeaderBackground={this.changeHeaderBackground}
           changeHeaderPattern={this.changeHeaderPattern}
           changeHeaderPatternColor={this.changeHeaderPatternColor}
-          changeFooterBorderRadius={this.changeFooterBorderRadius}
+          changeFooterBorderColor={this.changeFooterBorderColor}
           changeFooterBackground={this.changeFooterBackground}
           changeFooterPattern={this.changeFooterPattern}
           changeFooterPatternColor={this.changeFooterPatternColor}
